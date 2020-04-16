@@ -1,0 +1,21 @@
+image: tensorflow/tensorflow:1.15.2-gpu-py3
+build:
+  - ADD requirements.txt
+  - pip install -r requirements.txt
+labels:
+  - cifar10
+  - keras
+command: python run.py --train_mode=pretrain \
+    --train_batch_size=512 \
+    --train_epochs=1000 \
+    --learning_rate=1.0 \
+    --weight_decay=1e-6 \
+    --temperature=0.5 \
+    --dataset=cifar10 \
+    --image_size=32 \
+    --eval_split=test \
+    --resnet_depth=18 \
+    --use_blur=False \
+    --color_jitter_strength=0.5 \
+    --model_dir=/tmp/simclr_test \
+    --use_tpu=False
